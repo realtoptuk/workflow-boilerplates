@@ -1,22 +1,16 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { updateLogger } from '../reducers/logReducer/logActions';
+import { updateLogger } from '../Store/reducers/logReducer/logActions';
 
 const Test = ({ log, updateLogger }) => (
-  <Fragment>
-    {console.log(log.loading)}
-    {!log.loading && (
-      <button onClick={() => updateLogger()}>Redux action console.log</button>
-    )}
+  <>
+    {<button onClick={() => updateLogger()}>Do Redux action</button>}
     <p>{log.logger.flat()}</p>
-  </Fragment>
+  </>
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   log: state.log,
 });
 
-export default connect(
-  mapStateToProps,
-  { updateLogger }
-)(Test);
+export default connect(mapStateToProps, { updateLogger })(Test);

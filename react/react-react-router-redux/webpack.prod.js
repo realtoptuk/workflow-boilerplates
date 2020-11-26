@@ -7,7 +7,6 @@ const bundleAnalizerPlugin = require('webpack-bundle-analyzer')
 
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CompressionPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -18,7 +17,7 @@ const prod = {
   mode: 'production',
   output: {
     filename: 'app.[chunkhash].js',
-    chunkFilename: 'app.[chunkhash].chunk.js',
+    chunkFilename: '[id].[chunkhash].chunk.js',
   },
   module: {
     rules: [
@@ -35,8 +34,8 @@ const prod = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'app.[hash:8].css',
-      chunkFilename: '[id].css',
+      filename: 'app.[chunkhash].css',
+      chunkFilename: '[id].[chunkhash].css',
       ignoreOrder: false,
     }),
     new webpack.LoaderOptionsPlugin({
@@ -56,12 +55,6 @@ const prod = {
         minifyURLs: true,
       },
       inject: true,
-    }),
-    new CompressionPlugin({
-      algorithm: 'gzip',
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.8,
     }),
     new bundleAnalizerPlugin({
       analyzerMode: 'disabled',

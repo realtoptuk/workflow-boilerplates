@@ -7,7 +7,7 @@ Vue.use(Vuex);
 const log = new Logger();
 
 const mockedArray = () =>
-  new Promise(resolve => {
+  new Promise((resolve) => {
     setTimeout(() => {
       resolve([4, 8, 15, [16, 23], 42]);
     }, 1200);
@@ -19,7 +19,7 @@ const store = new Vuex.Store({
     zero: log.zero,
   },
   getters: {
-    arr: state => state.arr.flat(),
+    arr: (state) => state.arr.flat(),
   },
   mutations: {
     setArray: (state, payload) => {

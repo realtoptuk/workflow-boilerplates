@@ -12,7 +12,7 @@ const config = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'app.min.js',
+    filename: 'app.js',
   },
   resolve: {
     extensions: ['*', '.js', '.vue'],
@@ -46,7 +46,6 @@ const config = {
     new VueLoaderPlugin(),
     new HtmlWebPackPlugin({
       template: './public/index.html',
-      chunksSortMode: 'dependency',
     }),
   ],
 };
